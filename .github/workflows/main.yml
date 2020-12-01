@@ -19,7 +19,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: crc
-          key: ${{ runner.os }}-crc
+          key: ${{ runner.os }}-okd-crc
 
       - name: Download CRC binary
         if: steps.cache-crc-binary.outputs.cache-hit != 'true'
