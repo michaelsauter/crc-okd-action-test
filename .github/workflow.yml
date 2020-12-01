@@ -1,0 +1,20 @@
+name: Continous Integration Tests
+on: [push, pull_request]
+jobs:
+  run-cluster:
+    name: Run cluster
+    runs-on: ubuntu-18.04
+    steps:
+      -
+        name: Checkout repository
+        uses: actions/checkout@v2.0.0
+      -
+        name: Download crc binary
+        run: |
+          curl -LO https://dl.fedoraproject.org/pub/alt/okd-crc/linux-amd64/crc
+          sudo apt install -y qemu-kvm libvirt-daemon libvirt-daemon-system network-manager
+          chmod +x crc
+          sudo mv crc /usr/local/bin/crc
+          crc version
+          crc setup
+          crc start
